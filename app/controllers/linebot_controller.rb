@@ -39,7 +39,7 @@ class LinebotController < ApplicationController
 					if page.summary
 						response = page.summary + "\n" + page.fullurl
 					else
-						response = "Sorry can't find #{word}"
+						response = "Sorry can't find \"#{word}\""
 					end
 
 					message = {
