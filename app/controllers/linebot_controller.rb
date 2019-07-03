@@ -24,25 +24,22 @@ class LinebotController < ApplicationController
 		events = client.parse_events_from(body)
 
 		events.each { |event|
-			if event.message['text']
-				word = event.message['text']
-				Wikipedia.Configure {
-					domain 'ja.wikipedia.org'
-					path   'w/api.php'
-				}
-			end
-
-			if page = Wikipedia.find(word)
-				response = page.summary + "\n" + page.fullurl
-			else
-				response = "Sorry can't find #{word}"
-			end
-
 			case event
-
 			when Line::Bot::Event::Message
 				case event.type
 				when Line::Bot::Event::MessageType::Text
+					word = event.message['text']
+					Wikipedia.Configure {
+					domain 'ja.wikipedia.org'
+					path   'w/api.php'
+					}
+
+					if page = Wikipedia.find(word)
+						response = page.summary + "\n" + page.fullurl
+					else
+						response = "Sorry can't find #{word}"
+					end
+
 					message = {
 						type: 'text',
 						text: response
