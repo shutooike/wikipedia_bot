@@ -36,6 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use line bot api
 gem 'line-bot-api'
+gem 'wikipedia-client'
 
 gem 'dotenv-rails'
 
