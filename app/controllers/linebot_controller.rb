@@ -34,7 +34,11 @@ class LinebotController < ApplicationController
 
 			page = Wikipedia.find(word)
 
-			response = page.summary + "\n" + page.fullurl
+			if page
+				response = page.summary + "\n" + page.fullurl
+			else
+				response = "Sorry can't find #{word}"
+			end
 
 			case event
 
