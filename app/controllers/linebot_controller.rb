@@ -34,7 +34,9 @@ class LinebotController < ApplicationController
 					path   'w/api.php'
 					}
 
-					if page = Wikipedia.find(word)
+					page = Wikipedia.find(word)
+
+					if page.summary
 						response = page.summary + "\n" + page.fullurl
 					else
 						response = "Sorry can't find #{word}"
