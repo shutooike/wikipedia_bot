@@ -34,7 +34,7 @@ class LinebotController < ApplicationController
 
 			page = Wikipedia.find(word)
 
-			if page
+			if page != nil
 				response = page.summary + "\n" + page.fullurl
 			else
 				response = "Sorry can't find #{word}"
