@@ -24,7 +24,7 @@ class LinebotController < ApplicationController
 		events = client.parse_events_from(body)
 
 		events.each { |event|
-			if event.message['text'] != nil
+			if event.message['text']
 				word = event.message['text']
 				Wikipedia.Configure {
 					domain 'ja.wikipedia.org'
@@ -32,9 +32,7 @@ class LinebotController < ApplicationController
 				}
 			end
 
-			page = Wikipedia.find(word)
-
-			if page != nil
+			if page = Wikipedia.find(word)
 				response = page.summary + "\n" + page.fullurl
 			else
 				response = "Sorry can't find #{word}"
